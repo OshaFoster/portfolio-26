@@ -71,6 +71,7 @@ export default function App() {
         <section id="work">
           <p className="text-xs uppercase tracking-widest text-stone-400 mb-10">Work</p>
           <div>
+            <div className="h-px bg-stone-200" />
             {projects.map(({ title, year, type, description, stack, url }) => {
               const meta = (
                 <p className="text-xs text-stone-400">
@@ -86,31 +87,37 @@ export default function App() {
                     href={url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group block py-6 border-t border-stone-200"
+                    className="group block py-6"
                   >
                     <div className="flex items-baseline justify-between mb-1.5">
                       <p className="text-sm font-medium">
-                        {title} <span className="text-stone-300 group-hover:text-stone-500 transition-colors duration-150">↗</span>
+                        {title}
+                        <svg className="inline-block ml-2 mb-0.5 text-stone-300 group-hover:text-stone-500 transition-colors duration-150" width="14" height="9" viewBox="0 0 48 32" fill="currentColor">
+                          <polygon points="0,10 28,10 28,0 48,16 28,32 28,22 0,22"/>
+                        </svg>
                       </p>
                       <span className="text-xs text-stone-400">{year}</span>
                     </div>
                     <p className="text-sm text-stone-400 leading-relaxed mb-2">{description}</p>
                     {meta}
+                    <div className="relative h-px mt-6 bg-stone-200 overflow-hidden">
+                      <div className="absolute inset-0 bg-stone-400 origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500 ease-out"/>
+                    </div>
                   </a>
                 )
               }
               return (
-                <div key={title} className="py-6 border-t border-stone-200">
+                <div key={title} className="py-6">
                   <div className="flex items-baseline justify-between mb-1.5">
                     <p className="text-sm font-medium">{title}</p>
-                    <span className="text-xs text-stone-300">{year}</span>
+                    <span className="text-xs text-stone-400">{year}</span>
                   </div>
                   <p className="text-sm text-stone-400 leading-relaxed mb-2">{description}</p>
                   {meta}
+                  <div className="h-px mt-6 bg-stone-200"/>
                 </div>
               )
             })}
-            <div className="border-t border-stone-200" />
           </div>
         </section>
 
