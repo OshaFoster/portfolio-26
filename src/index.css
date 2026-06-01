@@ -59,6 +59,73 @@
   color: var(--mauve);
 }
 
+@media (max-width: 768px) {
+  html, body, #root {
+    height: auto !important;
+    min-height: 100dvh;
+    overflow: auto !important;
+  }
+
+  .layout {
+    flex-direction: column !important;
+    height: auto !important;
+    min-height: 100dvh;
+  }
+
+  .left-panel {
+    width: 100% !important;
+    height: auto !important;
+    padding: 48px 32px 40px !important;
+    justify-content: flex-start !important;
+    gap: 40px;
+  }
+
+  .left-panel h1 {
+    font-size: clamp(52px, 13vw, 80px) !important;
+    margin-bottom: 20px !important;
+  }
+
+  .main-nav {
+    flex-direction: row !important;
+    gap: 28px !important;
+  }
+
+  .divider {
+    width: 100% !important;
+    height: 1px !important;
+  }
+
+  .main-panel {
+    height: auto !important;
+    overflow-y: visible !important;
+    padding: 56px 32px 64px !important;
+  }
+
+  .watermark {
+    width: 280px !important;
+    left: auto !important;
+    right: 0% !important;
+    bottom: auto !important;
+    top: 10px !important;
+  }
+
+  #contact {
+    margin-bottom: 0 !important;
+  }
+
+  .corner-watermark {
+    position: static !important;
+    display: block !important;
+    margin-top: 24px !important;
+    margin-left: auto !important;
+    width: 140px !important;
+  }
+
+  .main-panel {
+    padding-bottom: 40px !important;
+  }
+}
+
 @layer base {
   :root {
     --bg:         #4E4549;

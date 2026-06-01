@@ -46,18 +46,28 @@ export default function App() {
 
   const handleNavClick = (e, label) => {
     e.preventDefault()
-    const main = mainRef.current
-    if (!main) return
-    if (label === 'Work') {
-      main.scrollTo({ top: 0, behavior: 'smooth' })
+    const isMobile = window.innerWidth < 768
+    if (isMobile) {
+      if (label === 'Work') {
+        window.scrollTo({ top: 0, behavior: 'smooth' })
+      } else {
+        const el = document.getElementById(label.toLowerCase())
+        if (el) el.scrollIntoView({ behavior: 'smooth' })
+      }
     } else {
-      const el = document.getElementById(label.toLowerCase())
-      if (el) main.scrollTo({ top: el.offsetTop - 80, behavior: 'smooth' })
+      const main = mainRef.current
+      if (!main) return
+      if (label === 'Work') {
+        main.scrollTo({ top: 0, behavior: 'smooth' })
+      } else {
+        const el = document.getElementById(label.toLowerCase())
+        if (el) main.scrollTo({ top: el.offsetTop - 80, behavior: 'smooth' })
+      }
     }
   }
 
   return (
-    <div style={{ display: 'flex', height: '100%', fontFamily: 'var(--font-body)', position: 'relative' }}>
+    <div className="layout" style={{ display: 'flex', height: '100%', fontFamily: 'var(--font-body)', position: 'relative' }}>
 
 
       {/* Watermark — lives on outer container so it can bleed across the divider */}
@@ -79,7 +89,7 @@ export default function App() {
       />
 
       {/* ── Left panel ───────────────────────── */}
-      <aside style={{
+      <aside className="left-panel" style={{
         width: '38%',
         height: '100%',
         flexShrink: 0,
@@ -138,7 +148,7 @@ export default function App() {
         </div>
 
         {/* Nav */}
-        <nav style={{ position: 'relative', zIndex: 1, display: 'flex', flexDirection: 'column', gap: '10px' }}>
+        <nav className="main-nav" style={{ position: 'relative', zIndex: 1, display: 'flex', flexDirection: 'column', gap: '10px' }}>
           {['Work', 'About', 'Contact'].map(label => (
             <a
               key={label}
@@ -162,12 +172,13 @@ export default function App() {
       </aside>
 
       {/* ── Divider ──────────────────────────── */}
-      <div style={{ width: '1px', height: '100%', background: 'var(--mauve)', opacity: 0.4, flexShrink: 0 }} />
+      <div className="divider" style={{ width: '1px', height: '100%', background: 'var(--mauve)', opacity: 0.4, flexShrink: 0 }} />
 
       {/* ── Right panel ──────────────────────── */}
       <main
         ref={mainRef}
         id="work"
+        className="main-panel"
         style={{
           flex: 1,
           height: '100%',
@@ -273,6 +284,7 @@ export default function App() {
             src="/images/Secret Bloom - Artboard 17.svg"
             alt=""
             aria-hidden="true"
+            className="corner-watermark"
             style={{
               position: 'absolute',
               bottom: '-138px',
