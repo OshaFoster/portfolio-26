@@ -1,3 +1,5 @@
+import { useRef } from 'react'
+
 // Watermark: swap between "Artboard 7" and "Artboard 17" below
 const WATERMARK = '/images/Secret Bloom - Artboard 7.svg'
 
@@ -40,6 +42,20 @@ const projects = [
 ]
 
 export default function App() {
+  const mainRef = useRef(null)
+
+  const handleNavClick = (e, label) => {
+    e.preventDefault()
+    const main = mainRef.current
+    if (!main) return
+    if (label === 'Work') {
+      main.scrollTo({ top: 0, behavior: 'smooth' })
+    } else {
+      const el = document.getElementById(label.toLowerCase())
+      if (el) main.scrollTo({ top: el.offsetTop - 80, behavior: 'smooth' })
+    }
+  }
+
   return (
     <div style={{ display: 'flex', height: '100%', fontFamily: 'var(--font-body)', position: 'relative' }}>
 
@@ -104,12 +120,12 @@ export default function App() {
               animationDelay: '0.45s',
             }}
           >
-            Freelance Web Designer
+            Personal Website Developer
           </p>
           <p
             className="anim-fade-in"
             style={{
-              fontSize: '13px',
+              fontSize: '15px',
               fontWeight: 300,
               lineHeight: 1.85,
               color: 'var(--muted)',
@@ -117,7 +133,7 @@ export default function App() {
               animationDelay: '0.75s',
             }}
           >
-            I design and build personal websites — simple, beautiful, and built to last.
+            I create thoughtful websites for individuals, creatives, and small businesses — simple, modern, and designed with care.
           </p>
         </div>
 
@@ -127,6 +143,7 @@ export default function App() {
             <a
               key={label}
               href={`#${label.toLowerCase()}`}
+              onClick={e => handleNavClick(e, label)}
               style={{
                 fontSize: '12px',
                 letterSpacing: '0.18em',
@@ -149,6 +166,7 @@ export default function App() {
 
       {/* ── Right panel ──────────────────────── */}
       <main
+        ref={mainRef}
         id="work"
         style={{
           flex: 1,
@@ -178,7 +196,7 @@ export default function App() {
                     </span>
                     <span style={{ fontSize: '11px', color: 'var(--muted)', letterSpacing: '0.1em' }}>{year}</span>
                   </div>
-                  <p style={{ fontSize: '13px', fontWeight: 300, lineHeight: 1.8, color: 'var(--muted)', marginBottom: '10px', maxWidth: '480px' }}>
+                  <p style={{ fontSize: '15px', fontWeight: 300, lineHeight: 1.8, color: 'var(--muted)', marginBottom: '10px', maxWidth: '480px' }}>
                     {description}
                   </p>
                   <span style={{ fontSize: '11px', letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--muted)' }}>
@@ -217,13 +235,13 @@ export default function App() {
             About
           </p>
           <p style={{ fontFamily: 'var(--font-display)', fontSize: '22px', fontWeight: 300, lineHeight: 1.65, color: 'var(--ink)', marginBottom: '24px' }}>
-            Software engineer who likes to build.
+            I build simple, thoughtful websites for individuals, creatives, and small businesses.
           </p>
           <p style={{ fontSize: '13px', fontWeight: 300, lineHeight: 1.9, color: 'var(--muted)', marginBottom: '16px' }}>
-            Lately that's meant working with AI on creative projects — not letting it generate everything at once, but breaking work into pieces and building up from a solid foundation.
+            My background is in full-stack software development, but these days I'm especially interested in creating clean portfolio sites, personal websites, and other projects that feel approachable, modern, and uniquely tailored to the person behind them.
           </p>
           <p style={{ fontSize: '13px', fontWeight: 300, lineHeight: 1.9, color: 'var(--muted)' }}>
-            Background in full-stack development across medical, construction, and data industries. Good at owning a project end to end.
+            I enjoy working closely with clients, keeping things simple, and building websites that are both beautiful and easy to maintain.
           </p>
         </section>
 
@@ -234,7 +252,7 @@ export default function App() {
           </p>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
             {[
-              { label: 'oshafoster@hotmail.com', href: 'mailto:oshafoster@hotmail.com' },
+              { label: 'oshagfoster@gmail.com', href: 'mailto:oshagfoster@gmail.com' },
               { label: 'GitHub', href: 'https://github.com/OshaFoster' },
               { label: 'LinkedIn', href: 'https://www.linkedin.com/in/osha-foster-a295ab52/' },
             ].map(({ label, href }) => (
