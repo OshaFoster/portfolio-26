@@ -128,8 +128,8 @@
 
 @layer base {
   :root {
-    --bg:         #4E4549;
-    --bg-light:   #5a5055;
+    --bg:         #453a3f;
+    --bg-light:   #504449;
     --ink:        #FFFFFF;
     --mauve:      #D5ADD3;
     --blush:      #FFE4F3;
