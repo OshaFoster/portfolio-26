@@ -2,9 +2,81 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: 'Bigilla';
+  src: url('/fonts/Bigilla.otf') format('opentype');
+  font-weight: 400;
+}
+@font-face {
+  font-family: 'Bigilla';
+  src: url('/fonts/Bigilla-Bold.otf') format('opentype');
+  font-weight: 700;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideLeft {
+  from { opacity: 0; transform: translateX(-14px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes fadeInWatermark {
+  from { opacity: 0; }
+  to   { opacity: 0.22; }
+}
+
+.anim-fade-up {
+  opacity: 0;
+  animation: fadeUp 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+.anim-slide-left {
+  opacity: 0;
+  animation: slideLeft 0.6s ease forwards;
+}
+.anim-fade-in {
+  opacity: 0;
+  animation: fadeIn 0.8s ease forwards;
+}
+.watermark {
+  opacity: 0;
+  animation: fadeInWatermark 1.8s ease forwards;
+  animation-delay: 0.6s;
+}
+
+.project-row .project-title {
+  color: var(--ink);
+  transition: color 0.3s ease;
+}
+.project-row:hover .project-title {
+  color: var(--mauve);
+}
 
 @layer base {
-  html {
+  :root {
+    --bg:         #4E4549;
+    --bg-light:   #5a5055;
+    --ink:        #FFFFFF;
+    --mauve:      #D5ADD3;
+    --blush:      #FFE4F3;
+    --muted:      rgba(255,251,253,0.45);
+    --divider:    rgba(213,173,211,0.2);
+    --font-display: 'Cormorant Garamond', Georgia, serif;
+    --font-body:    'Inter', sans-serif;
+  }
+
+  html, body, #root {
+    height: 100%;
+    overflow: hidden;
+    background-color: var(--bg);
+    color: var(--ink);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }

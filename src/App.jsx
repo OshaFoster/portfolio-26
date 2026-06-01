@@ -1,10 +1,12 @@
+// Watermark: swap between "Artboard 7" and "Artboard 17" below
+const WATERMARK = '/images/Secret Bloom - Artboard 7.svg'
+
 const projects = [
   {
     title: 'Easy Yum',
     year: '2026',
     type: 'Personal',
     description: 'A recipe app built around simple, one-pan meals. Designed, built, and launched independently using AI-assisted development.',
-    stack: 'React · Tailwind',
     url: 'https://www.easyyum.app/',
   },
   {
@@ -12,23 +14,20 @@ const projects = [
     year: '2026',
     type: 'Freelance',
     description: 'Portfolio and artist notes blog for oil painter Jen Sanborn. CMS-connected gallery built for long-term content ownership.',
-    stack: 'React · Tailwind · Sanity',
     url: 'https://www.sanbornstudio.com/',
   },
   {
     title: 'Token Stories',
     year: '2025',
     type: 'Personal',
-    description: 'A platform for short-form narratives shaped from thought experiments. Designed and built with AI-assisted development.',
-    stack: 'React · Tailwind · Framer Motion',
+    description: 'A platform for short-form narratives shaped from thought experiments.',
     url: 'https://www.tokenstories.org/',
   },
   {
     title: 'Merit Medical',
     year: '2022',
     type: 'Freelance',
-    description: 'Primary developer on a web app for generating medical supply label sets. Built the frontend, integrated a Django backend, and coordinated a small team to see the project through to delivery.',
-    stack: 'React Native Web · JavaScript · Django',
+    description: 'Primary developer on a web app for generating medical supply label sets. Built the frontend, integrated a Django backend, and coordinated a small team.',
     url: null,
   },
   {
@@ -36,85 +35,176 @@ const projects = [
     year: '2022',
     type: 'Freelance',
     description: 'Minimalist personal site for a researcher, built to highlight her academic background and make contact easy.',
-    stack: 'React',
     url: 'https://hilary-researcher.vercel.app/',
   },
 ]
 
 export default function App() {
   return (
-    <div className="flex flex-col md:flex-row min-h-screen bg-stone-50 text-stone-900 font-sans">
+    <div style={{ display: 'flex', height: '100%', fontFamily: 'var(--font-body)', position: 'relative' }}>
 
-      {/* Left — sticky identity */}
-      <aside className="md:w-[38%] md:sticky md:top-0 md:h-screen flex flex-col justify-between px-10 py-16">
-        <div className="space-y-3">
-          <h1 className="text-4xl font-light tracking-tight">Osha Foster</h1>
-          <p className="text-sm text-stone-500">Software Engineer</p>
-          <p className="text-sm text-stone-400 leading-relaxed max-w-xs pt-1">
-            I design and build — from concept to deployment, working independently
-            or as part of a team. Lately focused on AI-assisted development and
-            what it means to make thoughtful software with new tools.
+
+      {/* Watermark — lives on outer container so it can bleed across the divider */}
+      <img
+        src={WATERMARK}
+        alt=""
+        aria-hidden="true"
+        className="watermark"
+        style={{
+          position: 'absolute',
+          bottom: '-80px',
+          left: '6%',
+          width: '640px',
+          filter: 'invert(1) sepia(1) hue-rotate(300deg) saturate(2) brightness(1.3)',
+          pointerEvents: 'none',
+          userSelect: 'none',
+          zIndex: 2,
+        }}
+      />
+
+      {/* ── Left panel ───────────────────────── */}
+      <aside style={{
+        width: '38%',
+        height: '100%',
+        flexShrink: 0,
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+        padding: '64px 48px',
+        position: 'relative',
+        background: 'var(--bg-light)',
+      }}>
+
+        {/* Name + bio */}
+        <div style={{ position: 'relative', zIndex: 1 }}>
+          <h1
+            className="anim-fade-up"
+            style={{
+              fontFamily: "'Bigilla', var(--font-display)",
+              fontSize: '80px',
+              fontWeight: 400,
+              lineHeight: 0.95,
+              letterSpacing: '0.04em',
+              color: 'var(--ink)',
+              marginBottom: '28px',
+              animationDelay: '0.1s',
+            }}
+          >
+            Osha<br />Foster
+          </h1>
+          <p
+            className="anim-slide-left"
+            style={{
+              fontSize: '11px',
+              fontWeight: 400,
+              letterSpacing: '0.22em',
+              textTransform: 'uppercase',
+              color: 'var(--mauve)',
+              marginBottom: '20px',
+              animationDelay: '0.45s',
+            }}
+          >
+            Freelance Web Designer
+          </p>
+          <p
+            className="anim-fade-in"
+            style={{
+              fontSize: '13px',
+              fontWeight: 300,
+              lineHeight: 1.85,
+              color: 'var(--muted)',
+              maxWidth: '240px',
+              animationDelay: '0.75s',
+            }}
+          >
+            I design and build personal websites — simple, beautiful, and built to last.
           </p>
         </div>
 
-        <nav className="flex flex-col gap-1.5">
-          <a href="#work" className="text-sm text-stone-400 hover:text-stone-900 transition-colors duration-150">Work</a>
-          <a href="#about" className="text-sm text-stone-400 hover:text-stone-900 transition-colors duration-150">About</a>
-          <a href="#contact" className="text-sm text-stone-400 hover:text-stone-900 transition-colors duration-150">Contact</a>
+        {/* Nav */}
+        <nav style={{ position: 'relative', zIndex: 1, display: 'flex', flexDirection: 'column', gap: '10px' }}>
+          {['Work', 'About', 'Contact'].map(label => (
+            <a
+              key={label}
+              href={`#${label.toLowerCase()}`}
+              style={{
+                fontSize: '12px',
+                letterSpacing: '0.18em',
+                textTransform: 'uppercase',
+                color: 'var(--muted)',
+                textDecoration: 'none',
+                transition: 'color 0.2s',
+              }}
+              onMouseEnter={e => e.currentTarget.style.color = 'var(--blush)'}
+              onMouseLeave={e => e.currentTarget.style.color = 'var(--muted)'}
+            >
+              {label}
+            </a>
+          ))}
         </nav>
       </aside>
 
-      {/* Right — scrolling content */}
-      <main className="md:w-[62%] px-10 py-16 md:py-24 space-y-32 border-l border-stone-200">
+      {/* ── Divider ──────────────────────────── */}
+      <div style={{ width: '1px', height: '100%', background: 'var(--mauve)', opacity: 0.4, flexShrink: 0 }} />
 
+      {/* ── Right panel ──────────────────────── */}
+      <main
+        id="work"
+        style={{
+          flex: 1,
+          height: '100%',
+          overflowY: 'auto',
+          padding: '80px 64px',
+        }}
+      >
         {/* Work */}
-        <section id="work">
-          <p className="text-xs uppercase tracking-widest text-stone-400 mb-10">Work</p>
-          <div>
-            <div className="h-px bg-stone-200" />
-            {projects.map(({ title, year, type, description, stack, url }) => {
-              const meta = (
-                <p className="text-xs text-stone-400">
-                  <span className="text-stone-500">{type}</span>
-                  {' — '}
-                  {stack}
-                </p>
-              )
-              if (url) {
-                return (
-                  <a
-                    key={title}
-                    href={url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="group block py-6"
-                  >
-                    <div className="flex items-baseline justify-between mb-1.5">
-                      <p className="text-sm font-medium">
-                        {title}
-                        <svg className="inline-block ml-2 mb-0.5 text-stone-300 group-hover:text-stone-500 transition-colors duration-150" width="14" height="9" viewBox="0 0 48 32" fill="currentColor">
-                          <polygon points="0,10 28,10 28,0 48,16 28,32 28,22 0,22"/>
-                        </svg>
-                      </p>
-                      <span className="text-xs text-stone-400">{year}</span>
-                    </div>
-                    <p className="text-sm text-stone-400 leading-relaxed mb-2">{description}</p>
-                    {meta}
-                    <div className="relative h-px mt-6 bg-stone-200 overflow-hidden">
-                      <div className="absolute inset-0 bg-stone-400 origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500 ease-out"/>
-                    </div>
-                  </a>
-                )
-              }
-              return (
-                <div key={title} className="py-6">
-                  <div className="flex items-baseline justify-between mb-1.5">
-                    <p className="text-sm font-medium">{title}</p>
-                    <span className="text-xs text-stone-400">{year}</span>
+        <section style={{ marginBottom: '96px' }}>
+          <p style={{ fontSize: '11px', letterSpacing: '0.3em', textTransform: 'uppercase', color: 'var(--mauve)', marginBottom: '48px' }}>
+            Selected Work
+          </p>
+
+          <div style={{ borderTop: '1px solid var(--divider)' }}>
+            {projects.map(({ title, year, type, description, url }, i) => {
+              const inner = (
+                <>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: '10px' }}>
+                    <span className="project-title" style={{
+                      fontFamily: "'Bigilla', var(--font-display)",
+                      fontSize: '36px',
+                      fontWeight: 400,
+                      letterSpacing: '0.04em',
+                    }}>
+                      {title}
+                    </span>
+                    <span style={{ fontSize: '11px', color: 'var(--muted)', letterSpacing: '0.1em' }}>{year}</span>
                   </div>
-                  <p className="text-sm text-stone-400 leading-relaxed mb-2">{description}</p>
-                  {meta}
-                  <div className="h-px mt-6 bg-stone-200"/>
+                  <p style={{ fontSize: '13px', fontWeight: 300, lineHeight: 1.8, color: 'var(--muted)', marginBottom: '10px', maxWidth: '480px' }}>
+                    {description}
+                  </p>
+                  <span style={{ fontSize: '11px', letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--muted)' }}>
+                    {type}
+                  </span>
+                </>
+              )
+
+              const rowStyle = {
+                animationDelay: `${0.3 + i * 0.2}s`,
+              }
+
+              return url ? (
+                <a
+                  key={title}
+                  href={url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="project-row anim-fade-up"
+                  style={{ display: 'block', padding: '32px 0', borderBottom: '1px solid var(--divider)', textDecoration: 'none', ...rowStyle }}
+                >
+                  {inner}
+                </a>
+              ) : (
+                <div key={title} className="project-row anim-fade-up" style={{ padding: '32px 0', borderBottom: '1px solid var(--divider)', ...rowStyle }}>
+                  {inner}
                 </div>
               )
             })}
@@ -122,36 +212,60 @@ export default function App() {
         </section>
 
         {/* About */}
-        <section id="about">
-          <p className="text-xs uppercase tracking-widest text-stone-400 mb-10">About</p>
-          <div className="space-y-4 max-w-sm">
-            <p className="text-sm text-stone-500 leading-relaxed">
-              Software engineer who likes to build. Lately that's meant working with
-              AI on creative projects — not letting it generate everything at once,
-              but breaking work into pieces and building up from a solid foundation.
-              It tends to get to a done product.
-            </p>
-            <p className="text-sm text-stone-500 leading-relaxed">
-              Background in full-stack development across medical, construction, and
-              data industries. Good at owning a project end to end.
-            </p>
-          </div>
+        <section id="about" style={{ marginBottom: '96px', maxWidth: '480px' }}>
+          <p style={{ fontSize: '11px', letterSpacing: '0.3em', textTransform: 'uppercase', color: 'var(--mauve)', marginBottom: '32px' }}>
+            About
+          </p>
+          <p style={{ fontFamily: 'var(--font-display)', fontSize: '22px', fontWeight: 300, lineHeight: 1.65, color: 'var(--ink)', marginBottom: '24px' }}>
+            Software engineer who likes to build.
+          </p>
+          <p style={{ fontSize: '13px', fontWeight: 300, lineHeight: 1.9, color: 'var(--muted)', marginBottom: '16px' }}>
+            Lately that's meant working with AI on creative projects — not letting it generate everything at once, but breaking work into pieces and building up from a solid foundation.
+          </p>
+          <p style={{ fontSize: '13px', fontWeight: 300, lineHeight: 1.9, color: 'var(--muted)' }}>
+            Background in full-stack development across medical, construction, and data industries. Good at owning a project end to end.
+          </p>
         </section>
 
         {/* Contact */}
-        <section id="contact">
-          <p className="text-xs uppercase tracking-widest text-stone-400 mb-10">Contact</p>
-          <div className="space-y-2">
-            <a href="mailto:oshafoster@hotmail.com" className="block text-sm text-stone-500 hover:text-stone-900 transition-colors duration-150">
-              oshafoster@hotmail.com
-            </a>
-            <a href="https://github.com/OshaFoster" target="_blank" rel="noopener noreferrer" className="block text-sm text-stone-400 hover:text-stone-900 transition-colors duration-150">
-              GitHub
-            </a>
-            <a href="https://www.linkedin.com/in/osha-foster-a295ab52/" target="_blank" rel="noopener noreferrer" className="block text-sm text-stone-400 hover:text-stone-900 transition-colors duration-150">
-              LinkedIn
-            </a>
+        <section id="contact" style={{ marginBottom: '96px', position: 'relative' }}>
+          <p style={{ fontSize: '11px', letterSpacing: '0.3em', textTransform: 'uppercase', color: 'var(--mauve)', marginBottom: '32px' }}>
+            Contact
+          </p>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+            {[
+              { label: 'oshafoster@hotmail.com', href: 'mailto:oshafoster@hotmail.com' },
+              { label: 'GitHub', href: 'https://github.com/OshaFoster' },
+              { label: 'LinkedIn', href: 'https://www.linkedin.com/in/osha-foster-a295ab52/' },
+            ].map(({ label, href }) => (
+              <a
+                key={label}
+                href={href}
+                target={href.startsWith('http') ? '_blank' : undefined}
+                rel="noopener noreferrer"
+                style={{ fontSize: '13px', fontWeight: 300, color: 'var(--muted)', textDecoration: 'none', transition: 'color 0.2s' }}
+                onMouseEnter={e => e.currentTarget.style.color = 'var(--blush)'}
+                onMouseLeave={e => e.currentTarget.style.color = 'var(--muted)'}
+              >
+                {label}
+              </a>
+            ))}
           </div>
+          <img
+            src="/images/Secret Bloom - Artboard 17.svg"
+            alt=""
+            aria-hidden="true"
+            style={{
+              position: 'absolute',
+              bottom: '-138px',
+              right: '-36px',
+              width: '160px',
+              opacity: 0.3,
+              filter: 'brightness(10)',
+              pointerEvents: 'none',
+              userSelect: 'none',
+            }}
+          />
         </section>
 
       </main>
