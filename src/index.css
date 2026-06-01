@@ -75,7 +75,7 @@
   .left-panel {
     width: 100% !important;
     height: auto !important;
-    padding: 48px 32px 40px !important;
+    padding: 64px 32px 64px !important;
     justify-content: flex-start !important;
     gap: 40px;
   }
